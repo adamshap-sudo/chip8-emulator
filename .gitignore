@@ -1,0 +1,4 @@
+build/
+*.o
+chip8
+.vscode/
