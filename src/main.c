@@ -8,7 +8,7 @@
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 320
-#define FRAME_DURATION_MS 1000U / 60U
+#define FRAME_DURATION_MS (1000U / 60U)
 #define CPU_CYCLES_PER_FRAME 10U
 #define AUDIO_SAMPLE_RATE 44100U
 #define AUDIO_FREQUENCY 440U
@@ -167,6 +167,10 @@ int main(int argc, char **argv)
                 continue;
             }
 
+            /* INTERVIEW NOTE: Handling user input properly is critical. Missing bounds checks on
+             * arrays indexed by input (like keypad arrays) can lead to OOB writes. Here, keypad_index
+             * ensures we only index within 0-15.
+             */
             key = keypad_index(event.key.keysym.sym);
             if (key >= 0) {
                 c8.keypad[key] = event.type == SDL_KEYDOWN;
